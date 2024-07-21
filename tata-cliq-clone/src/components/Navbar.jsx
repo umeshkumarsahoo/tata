@@ -1,50 +1,74 @@
-import { Link } from 'react-router-dom';
-import { Box, Button, Input, Flex } from '@chakra-ui/react';
-import { useContext, useState } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import { Box, Flex, Link, Input, IconButton, Spacer, Text } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import { Link as RouterLink } from "react-router-dom";
+import { FaHeart, FaShoppingCart, FaHome, FaStore } from "react-icons/fa";
 
 const Navbar = () => {
-  const { user, logout } = useContext(AuthContext);
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // Handle search logic here
-    console.log(searchQuery);
-  };
-
   return (
-    <Box as="nav" p="4" bg="teal.500" color="white">
-      <Flex justify="space-between" align="center">
-        <Link to="/">Home</Link>
-        <form onSubmit={handleSearch}>
+    <Box
+      bg="black"
+      px={4}
+      py={2}
+      position="sticky"
+      top="0"
+      zIndex="10"
+    >
+      <Flex alignItems="center">
+        <Box>
+          <Link as={RouterLink} to="/" color="white" fontSize="2xl" fontWeight="bold">
+            Tata CLiQ
+          </Link>
+        </Box>
+        <Spacer />
+        <Box display="flex" alignItems="center" color="white">
           <Input
-            placeholder="Search products"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            width="300px"
+            placeholder="Search for Categories"
             bg="white"
             color="black"
-            mr="2"
+            borderRadius="md"
+            width="300px"
+            mr={4}
           />
-          <Button type="submit">Search</Button>
-        </form>
-        <Flex>
-          {user ? (
-            <>
-              <Button onClick={logout}>Logout</Button>
-              <Link to="/cart">Cart</Link>
-            </>
-          ) : (
-            <>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Signup</Link>
-            </>
-          )}
-        </Flex>
+          <IconButton
+            aria-label="Search"
+            icon={<SearchIcon />}
+            bg="white"
+            color="black"
+            _hover={{ bg: "gray.200", color: "black" }}
+            mr={4}
+          />
+          <Link as={RouterLink} to="/products" mx={2} _hover={{ color: "gray.300" }}>
+            <Flex direction="column" alignItems="center">
+              <FaStore size="1.5em" />
+              <Text fontSize="xs">Products</Text>
+            </Flex>
+          </Link>
+          <Link as={RouterLink} to="/wishlist" mx={2} _hover={{ color: "gray.300" }}>
+            <Flex direction="column" alignItems="center">
+              <FaHeart size="1.5em" />
+              <Text fontSize="xs">Wishlist</Text>
+            </Flex>
+          </Link>
+          <Link as={RouterLink} to="/cart" mx={2} _hover={{ color: "gray.300" }}>
+            <Flex direction="column" alignItems="center">
+              <FaShoppingCart size="1.5em" />
+              <Text fontSize="xs">Cart</Text>
+            </Flex>
+          </Link>
+          <Link as={RouterLink} to="/login" mx={2} _hover={{ color: "gray.300" }}>
+            <Flex direction="column" alignItems="center">
+              <FaHome size="1.5em" />
+              <Text fontSize="xs">Login</Text>
+            </Flex>
+          </Link>
+        </Box>
       </Flex>
     </Box>
   );
 };
 
 export default Navbar;
+
+
+
+

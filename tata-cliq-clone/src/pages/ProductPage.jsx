@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+
 import axios from 'axios';
 import { Box, Image, Text } from '@chakra-ui/react';
 
@@ -25,3 +26,4 @@ const ProductPage = () => {
 };
 
 export default ProductPage;
+
